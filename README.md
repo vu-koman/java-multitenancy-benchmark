@@ -59,11 +59,11 @@ Script for the STDS approach is located in `./jmtb-load-test/load-test-1-stds.js
 ## Results
 
 ### MTDS approach
-- ![Scenario 1, MTDS approach, one application](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1.html)
-- ![Scenario 1, MTDS approach, 3 applications, load balancer in front](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1_3instance.html)
+- [Scenario 1, MTDS approach, one application](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1.html)
+- [Scenario 1, MTDS approach, 3 applications, load balancer in front](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1_3instance.html)
 
 ### STDS approach
-- ![Scenario 1, STDS approach, 5 applications, load balancer in front](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1-stds.html)
+- [Scenario 1, STDS approach, 5 applications, load balancer in front](https://htmlpreview.github.io/?https://github.com/vu-koman/java-multitenancy-benchmark/blob/main/results/load-test-1-stds.html)
 
 
 ## Conclusion
