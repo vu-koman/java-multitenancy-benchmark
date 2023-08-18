@@ -1,6 +1,6 @@
 # java-multi-tenancy-benchmark
 
-Simple spring boot app with load tests to compare different approaches to implement multi tenancy in a java application.
+Simple spring boot app with load tests to compare different approaches to implement multi-tenancy in a java application.
 
 ## Table of contents
 
@@ -8,7 +8,7 @@ Simple spring boot app with load tests to compare different approaches to implem
   * [Index](#index)
   * [Environment](#environment)
   * [Technologies](#technologies)
-  * [First approach MTDS - Multi tenant data source per application, one application serves all tenants](#first-approach-mtds---multi-tenant-data-source-per-application-one-application-serves-all-tenants)
+  * [First approach MTDS - Multi-tenant data source per application, one application serves all tenants](#first-approach-mtds---multi-tenant-data-source-per-application-one-application-serves-all-tenants)
   * [Second approach STDS - Single tenant data source per application, one application per tenant](#second-approach-stds---single-tenant-data-source-per-application-one-application-per-tenant)
   * [Scenarios](#scenarios)
     * [Scenario 1 - 5 tenants, 20 users per tenant, 100 requests per user](#scenario-1---5-tenants-20-users-per-tenant-100-requests-per-user)
@@ -20,38 +20,38 @@ Simple spring boot app with load tests to compare different approaches to implem
 
 ## Environment
 
-- Docker is used as execution environment
+- Docker is used as an execution environment
 - Docker compose is used to configure deployments
 - Tests are run on MacBook Pro M1 8 cores 2020 with 16GB RAM
 
 ## Technologies
 
-- Java 17, Srping Boot 3.1.2, Spring Data JPA - for application
+- Java 17, Spring Boot 3.1.2, Spring Data JPA - for application
 - YugabyteDB - for database
-- Nginx - for load balancing
+- Nginx - for load balancing and reverse proxying 
 - K6 - for load testing
 
-## First approach MTDS - Multi tenant data source per application, one application serves all tenants
+## First approach MTDS - Multi-tenant data source per application, one application serves all tenants
 
 MTDS approach is implemented using `AbstractRoutingDataSource` and `ThreadLocal` to store tenant id.
 
 All tenants share the same database and use different schemas to store data.
 
-Application uses header `tenant` to identify tenant.
+The application uses the header `tenant` to identify the tenant.
 
 ## Second approach STDS - Single tenant data source per application, one application per tenant
 
-STDS approach is using environment variables to configure database connection.
+STDS approach uses environment variables to configure the database connection.
 
 All tenants share the same database and use different schemas to store data.
 
-Load balancer is used to route requests to different applications and it uses header `X-Tenant` to identify tenant.
+A reverse proxy is used to route requests to different applications and it uses the header `X-Tenant` to identify tenants.
 
 ## Scenarios
 
 ### Scenario 1 - 5 tenants, 20 users per tenant, 100 requests per user
 
-Scenario is implemented using k6 load testing tool.
+The scenario is implemented using the k6 load testing tool.
 
 Script for the MTDS approach is located in `./jmtb-load-test/load-test-1.js`.
 Script for the STDS approach is located in `./jmtb-load-test/load-test-1-stds.js`.
@@ -68,8 +68,8 @@ Script for the STDS approach is located in `./jmtb-load-test/load-test-1-stds.js
 
 ## Conclusion
 
-- STDS approach is faster than MTDS approach
-- MTDS approach has more timeouts than STDS approach
+- STDS approach is faster than the MTDS approach
+- MTDS approach has more timeouts than the STDS approach
 - STDS does not require any additional programming, MTDS requires to implement `AbstractRoutingDataSource` and `ThreadLocal` to store tenant id
 
 ## Next steps
