@@ -1,0 +1,45 @@
+version: '2.4'
+
+networks:
+  mt-poc-net:
+
+services:
+  load-test-1:
+    image: jmtb-load-test
+    build: ./jmtb-load-test
+    environment:
+      - TEST_FILE=load-test-1.js
+      - VUS=100
+      - ITERATIONS=10000
+      - HTML_SUMMARY_NAME=./results/load-test-1_3instance.html
+      - TENANT_COUNT=5
+    volumes:
+      - ./results:/load-test/results
+    networks:
+      - mt-poc-net
+
+#  load-test-1-stds:
+#    image: jmtb-load-test
+#    build: ./jmtb-load-test
+#    environment:
+#      - TEST_FILE=load-test-1-stds.js
+#      - VUS=100
+#      - ITERATIONS=10000
+#      - HTML_SUMMARY_NAME=./results/load-test-1-stds.html
+#      - TENANT_COUNT=5
+#    volumes:
+#      - ./results:/load-test/results
+#    networks:
+#      - mt-poc-net
+
+#  load-test-2:
+#    image: jmtb-load-test
+#    build: ./jmtb-load-test
+#    environment:
+#      - TEST_FILE=load-test-2.js
+#      - VUS=1000
+#      - ITERATIONS=100000
+#      - HTML_SUMMARY_NAME=./results/load-test-2.html
+#      - TENANT_COUNT=5
+#    networks:
+#      - mt-poc-net

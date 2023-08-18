@@ -1,0 +1,15 @@
+version: '2.4'
+
+networks:
+  mt-poc-net:
+
+services:
+  yugabyte:
+    image: yugabytedb/yugabyte:latest
+    command: bin/yugabyted start --daemon=false
+    hostname: yugabyte
+    ports:
+      - "5433:5433"
+      - "7001:7000"
+    networks:
+      - mt-poc-net

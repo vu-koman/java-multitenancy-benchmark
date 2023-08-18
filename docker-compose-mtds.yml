@@ -1,0 +1,48 @@
+version: '2.4'
+
+networks:
+  mt-poc-net:
+
+services:
+  yugabyte:
+    image: yugabytedb/yugabyte:latest
+    command: bin/yugabyted start --daemon=false
+    hostname: yugabyte
+    ports:
+      - "5433:5433"
+      - "7001:7000"
+    networks:
+      - mt-poc-net
+
+  reverse-proxy:
+    image: reverse-proxy-mtds
+    build: ./reverse-proxy-mtds
+    hostname: demo-app
+    ports:
+      - "8888:80"
+    networks:
+      - mt-poc-net
+
+  demo-app-1:
+    image: demo-app
+    hostname: demo-app-1
+    environment:
+      - "multitenant.datasource=true"
+    networks:
+        - mt-poc-net
+
+  demo-app-2:
+    image: demo-app
+    hostname: demo-app-2
+    environment:
+      - "multitenant.datasource=true"
+    networks:
+      - mt-poc-net
+
+  demo-app-3:
+    image: demo-app
+    hostname: demo-app-3
+    environment:
+      - "multitenant.datasource=true"
+    networks:
+      - mt-poc-net

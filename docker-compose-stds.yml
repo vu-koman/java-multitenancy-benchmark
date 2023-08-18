@@ -1,0 +1,70 @@
+version: '2.4'
+
+networks:
+  mt-poc-net:
+
+services:
+  yugabyte:
+    image: yugabytedb/yugabyte:latest
+    command: bin/yugabyted start --daemon=false
+    hostname: yugabyte
+    ports:
+      - "5433:5433"
+      - "7001:7000"
+    networks:
+      - mt-poc-net
+
+  reverse-proxy:
+    image: reverse-proxy
+    build: ./reverse-proxy
+    hostname: demo-app
+    ports:
+      - "8888:80"
+    networks:
+        - mt-poc-net
+
+  demo-app-1:
+    image: demo-app
+    hostname: demo-app-1
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://yugabyte:5433/mtdb?currentSchema=tenant1"
+      - "multitenant.datasource=false"
+    networks:
+      - mt-poc-net
+
+  demo-app-2:
+    image: demo-app
+    hostname: demo-app-2
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://yugabyte:5433/mtdb?currentSchema=tenant2"
+      - "multitenant.datasource=false"
+    networks:
+      - mt-poc-net
+
+  demo-app-3:
+    image: demo-app
+    hostname: demo-app-3
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://yugabyte:5433/mtdb?currentSchema=tenant3"
+      - "multitenant.datasource=false"
+    networks:
+      - mt-poc-net
+
+  demo-app-4:
+    image: demo-app
+    hostname: demo-app-4
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://yugabyte:5433/mtdb?currentSchema=tenant4"
+      - "multitenant.datasource=false"
+    networks:
+      - mt-poc-net
+
+  demo-app-5:
+    image: demo-app
+    hostname: demo-app-5
+    environment:
+      - "spring.datasource.url=jdbc:postgresql://yugabyte:5433/mtdb?currentSchema=tenant5"
+      - "multitenant.datasource=false"
+    networks:
+      - mt-poc-net
+
